@@ -50,11 +50,11 @@ exports.category_create_get = asyncHandler(async (req, res, next) => {
     res.render("category_form", { title: "Create Category" });
 }); 
 
-exports.category_create_post = asyncHandler(async (req, res, next) => {
+exports.category_create_post = [
     body("name", "Category name must contain at least 3 characters")
     .trim()
     .isLength({ min: 3 })   
-    .escape();
+    .escape(),
 
   // Process request after validation and sanitization.
 
@@ -89,7 +89,7 @@ exports.category_create_post = asyncHandler(async (req, res, next) => {
         }
       }
   })
-}); 
+]; 
 
 exports.category_delete_get = asyncHandler(async (req, res, next) => {
     const [category, itemsInCategory] = await Promise.all([
